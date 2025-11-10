@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.22)
 project(crazyflie_cpp VERSION 1.0)
 
 # Enable C++14 and warnings
@@ -31,29 +31,33 @@ target_link_libraries(crazyflie_cpp
     crazyflieLinkCpp
 )
 
+set_target_properties(crazyflie_cpp PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+
 # include(CMakePackageConfigHelpers)
 # write_basic_package_version_file(
 #   crazyflie_cpp-config-version.cmake
 #   VERSION ${CRAZYFLIE_CPP_VERSION}
 #   COMPATIBILITY AnyNewerVersion
 # )
-
 # install(
 #   DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/crazyflie_cpp
 #   DESTINATION include
 # )
 
-# install(
-#   TARGETS crazyflie_cpp
-#   EXPORT crazyflie_cpp-targets
+# install(TARGETS 
+#   crazyflie_cpp 
+#   crazyflieLinkCpp
+#   EXPORT crazyflie_cppTargets
 #   LIBRARY DESTINATION lib
 #   ARCHIVE DESTINATION lib
 #   RUNTIME DESTINATION bin
 #   INCLUDES DESTINATION include
 # )
 
-# install(EXPORT crazyflie_cpp-targets
-#   FILE crazyflie_cpp-targets.cmake
+# ament_export_targets(crazyflie_cppTargets HAS_LIBRARY_TARGET)
+
+# install(EXPORT crazyflie_cppTargets
+#   FILE crazyflie_cppTargets.cmake
 #   NAMESPACE crazyflie_cpp::
 #   DESTINATION lib/cmake/crazyflie_cpp
 # )
